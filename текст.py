@@ -1,3 +1,6 @@
+import os
+
+
 def get_info_and_writing_to_list(file_names):
     '''Считывание содержимого файлов и запись информации в список'''
     my_data = []
@@ -19,4 +22,10 @@ def writing_info_to_file(my_data, my_file):
     file_path = os.path.join(os.getcwd(), my_file)
     return file_path
 
-print(writing_info_to_file(get_info_and_writing_to_list(['1.txt', '2.txt', '3.txt']), 'res.txt'))
+data = get_info_and_writing_to_list(['1.txt', '2.txt', '3.txt'])
+file_path = writing_info_to_file(data, 'res.txt')
+
+# print(file_path)
+
+
+
