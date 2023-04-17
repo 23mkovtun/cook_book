@@ -10,8 +10,6 @@ with open(full_path, encoding="utf-8") as f:
     res = f.read()
   # print(res)
 
-
-
 cook_book = {}
 key = ['ingredient_name', 'quantity', 'measure']
 with open(full_path, encoding="utf-8") as f:
@@ -30,5 +28,28 @@ with open(full_path, encoding="utf-8") as f:
             ingredients.append(ingredient)
         cook_book[name] = ingredients
         f.readline().rstrip()
-    # print(cook_book)
-    print(f"Cook_book =", cook_book)
+
+
+def get_shop_list_by_dishes(dishes, person_count):
+    
+    ingredients = {}
+
+    for dish in dishes:
+        for ingredient in cook_book[dish]:
+            if ingredients.get(ingredient['ingredient_name']) == None:
+                ingredients[ingredient['ingredient_name']] = {'measure': '?', 'quantity': 0}
+
+            ingredients[ingredient['ingredient_name']]['quantity'] += person_count * ingredient['quantity']
+            ingredients[ingredient['ingredient_name']]['measure'] = ingredient['measure']
+
+    return ingredients
+
+def create_shop_list():
+    person_count = int(input('Введите количество человек: '))
+    dishes = input('Введите блюда в расчете на одного человека (через запятую): ') \
+        .split(', ')
+    shop_list = get_shop_list_by_dishes(dishes, person_count)
+    print(shop_list)
+
+create_shop_list()
+    
